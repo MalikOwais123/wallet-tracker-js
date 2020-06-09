@@ -3,3 +3,35 @@
     margin: 0px;
     border:0px;
 }
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 10vh 15vh minmax(75vh,min-content);
+}
+
+.navbar {
+    background-color: lightseagreen;
+    display: grid;
+    grid-template-columns: min-content 1fr max-content;
+}
+
+.logo {
+    padding: 0 10px;
+}
+
+.name {
+    padding: 0 10px;
+}
+
+.transactionForm {
+    background: rgb(235, 157, 255);
+}
+.transactionList {
+    background: lightseagreen;
+}
