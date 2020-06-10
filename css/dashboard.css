@@ -29,9 +29,19 @@
     padding: 0 10px;
 }
 
-.transactionForm {
+.transactionFormArea {
     background: rgb(235, 157, 255);
 }
 .transactionList {
     background: lightseagreen;
+}
+
+.transactionListItem {
+    display: grid;
+    grid-template-columns: min-content 1fr min-content max-content;
+    column-gap: 20px;
+}
+
+.listItem {
+    padding: 20px;
 }
