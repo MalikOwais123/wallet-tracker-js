@@ -85,11 +85,6 @@ var renderTransactions = (transactionArr) => {
   });
 };
 
-// var deleteBtn = document.querySelector(".deleteBtn");
-// console.log(deleteBtn);
-
-
-
 var fetchTransactions = async (uid) => {
   try {
     var transactions = [];
