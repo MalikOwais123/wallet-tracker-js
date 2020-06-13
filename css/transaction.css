@@ -3,3 +3,59 @@
     margin: 0px;
     border:0px;
 }
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: lightslategray;
+    display : grid;
+    grid-template-columns: 20vw 60vw 20vw;
+    grid-template-rows: 10vh 20vh 60vh 10vh;
+    grid-template-areas: ". . . "
+                         ". heading . "
+                         ". transactionDetails ."
+                         ". . .";
+
+}
+
+.heading {
+    grid-area: heading;
+    background: lightsalmon;
+}
+
+.transactionDetails {
+    grid-area: transactionDetails;
+    background: rgb(0, 90, 86);
+}
+
+.form {
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.input {
+    background: lightseagreen;
+    border-radius: 5px;
+    height: 5vh;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    /* border: 1px solid black; */
+    color: wheat;
+}
+
+.updateBtn {
+    border-radius: 2px;
+    background: mediumaquamarine;
+    padding: 2px;
+}
+
+.deleteBtn {
+    border-radius: 2px;
+    background: mediumaquamarine;
+    padding: 2px;
+}

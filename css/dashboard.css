@@ -33,12 +33,17 @@
     background: rgb(235, 157, 255);
 }
 .transactionList {
-    background: lightseagreen;
+    background-color: rgb(2, 134, 128);
 }
 
 .transactionListItem {
+    background: lightseagreen;
+    border-radius: 12px;
     display: grid;
-    grid-template-columns: min-content 1fr min-content max-content min-content;
+    margin-top: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
+    grid-template-columns: min-content 1fr min-content max-content min-content min-content;
     column-gap: 20px;
 }
 

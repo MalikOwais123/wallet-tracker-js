@@ -73,7 +73,8 @@ var signinFormSubmission = async (e) => {
         location.assign(`./dashboard.html#${uid}`);
     }
 } catch (error) {
-    console.log(error.message);
+    // console.log(error.message);
+    alert(error.message);
 }
 };
 

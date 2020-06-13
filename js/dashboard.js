@@ -5,6 +5,17 @@ var signoutBtn = document.querySelector(".signoutBtn");
 var transactionForm = document.querySelector(".transactionForm");
 var uid = null;
 var transactionList = document.querySelector(".transactionList");
+// console.log(transactionList);
+
+var deleteTransactionBtn = (e) => {
+  if (e.target.id.includes("deleteBtn")) {
+    console.log("transaction area clicked:");
+  } else {
+    return;
+  }
+};
+
+transactionList.addEventListener("click", (e) => deleteTransactionBtn(e));
 
 // console.log(nameDiv.textContent);
 // fetch uid from url
@@ -25,9 +36,29 @@ var userSignout = async () => {
   await auth.signOut();
 };
 
+// total cost
+var totalCostTransaction = (transArr) => {
+  var amountDiv = document.querySelector(".amount h2");
+  var totalCost = 0;
+  // here loop to each transaction
+  transArr.forEach((transaction) => {
+    var { cost, transactionType } = transaction;
+    if (transactionType === "income") {
+      totalCost = totalCost + cost;
+    } else {
+      totalCost = totalCost - cost;
+    }
+  });
+  amountDiv.textContent = `${totalCost} RS`;
+  // console.log(totalCost);
+};
 
 var renderTransactions = (transactionArr) => {
-  transactionList.innerHTML =" ";
+  // setting total Cost of user
+  totalCostTransaction(transactionArr);
+
+  // display all user
+  transactionList.innerHTML = " ";
   transactionArr.forEach((transaction, index) => {
     var { title, cost, transactionAt, transactionId } = transaction;
     transactionList.insertAdjacentHTML(
@@ -46,12 +77,18 @@ var renderTransactions = (transactionArr) => {
                 <h3>${transactionAt.toDate().toISOString().split("T")[0]}</h3> 
             </div>
             <div class="rendertransactionAt listItem">
-              <a href = "./transaction.html#${transactionId}"><button type = "button">view</button></a>
+              <a href = "./transaction.html#${transactionId}"><button type = "button">Edit</button></a>
             </div>
+            
         </div>`
     );
   });
 };
+
+// var deleteBtn = document.querySelector(".deleteBtn");
+// console.log(deleteBtn);
+
+
 
 var fetchTransactions = async (uid) => {
   try {
@@ -59,11 +96,11 @@ var fetchTransactions = async (uid) => {
     var query = await firestore
       .collection("transactions")
       .where("transactionBy", "==", uid)
-      .orderBy("transactionAt",'desc')
+      .orderBy("transactionAt", "desc")
       .get();
     // function here we use is actually provided by firebase
     query.forEach((doc) => {
-      // here we added new field name transactionId having doc.id in it
+      // here we fetch transactionId having doc.id in it
       // console.log({...doc.data() , transactionId : doc.id});
       transactions.push({ ...doc.data(), transactionId: doc.id });
     });
@@ -73,7 +110,6 @@ var fetchTransactions = async (uid) => {
     console.log(error.message);
   }
 };
-
 
 var transactionFormSubmission = async (e) => {
   e.preventDefault();
@@ -87,7 +123,7 @@ var transactionFormSubmission = async (e) => {
     if (title && cost && transactionAt && transactionType) {
       var transactionObj = {
         title,
-        cost,
+        cost: parseInt(cost),
         transactionType,
         transactionAt: new Date(transactionAt),
         transactionBy: uid,
@@ -97,6 +133,7 @@ var transactionFormSubmission = async (e) => {
 
       // 1) fetch transaction from firebase
       var transactions = await fetchTransactions(uid);
+
       // console.log(transactions);
 
       // 2) render transaction in html through js
@@ -123,9 +160,9 @@ auth.onAuthStateChanged(async (user) => {
     nameDiv.textContent = userInfo.fullName;
 
     // render transaction steps
+
     // 1) fetch transaction from firebase
     var transactions = await fetchTransactions(uid);
-
     // 2) render transaction in html through js
     renderTransactions(transactions);
   } else {
