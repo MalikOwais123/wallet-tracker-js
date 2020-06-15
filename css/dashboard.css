@@ -10,15 +10,30 @@
     align-items: center;
 }
 
+.styleBtn {
+    border-radius: 3px;
+    background: #3c6382;
+    padding: 4px;
+    color: white;
+    cursor: pointer;
+}
+
 .container {
     display: grid;
     grid-template-rows: 10vh 15vh minmax(75vh,min-content);
 }
 
 .navbar {
-    background-color: lightseagreen;
+    background-color: #3c6382;
     display: grid;
     grid-template-columns: min-content 1fr max-content;
+    /* color:#f3a23f */
+}
+
+.signoutBtn {
+    background-color: #f3a23f;
+    /* color: white; */
+    margin: 8px;
 }
 
 .logo {
@@ -30,23 +45,50 @@
 }
 
 .transactionFormArea {
-    background: rgb(235, 157, 255);
-}
-.transactionList {
-    background-color: rgb(2, 134, 128);
+    background: #f3a23f;
 }
 
-.transactionListItem {
+.input {
     background: lightseagreen;
+    border-radius: 4px;
+    height: 5vh;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    /* border: 1px solid black; */
+    color: wheat;
+}
+
+.transactionList {
+    background-color: #3c6382;
+}
+/* 3c6382 */
+.transactionListItem {
+    background: #60a3bc;
     border-radius: 12px;
     display: grid;
     margin-top: 10px;
     margin-right: 5px;
     margin-left: 5px;
-    grid-template-columns: min-content 1fr min-content max-content min-content min-content;
+    grid-template-columns: min-content 1fr max-content min-content max-content min-content;
     column-gap: 20px;
 }
 
+.addBtn{
+    margin: 6px;
+}
+
+.expenseIcon i{
+    color : #ff3838;
+    font-size: 20px;
+}
+
+.incomeIcon i{
+    color : #2ed573;
+    font-size: 20px;
+}
+
 .listItem {
+    /* color: red; */
     padding: 20px;
 }

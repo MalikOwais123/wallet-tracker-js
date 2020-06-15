@@ -1,3 +1,13 @@
+/*
+  ********************
+  -fetch specific transaction on the basis id of transaction
+  -fill form initiall data with that transaction
+  -allow user to edit transaction
+  ********************
+ */
+
+/* global variables */
+
 var firestore = firebase.firestore();
 var auth = firebase.auth();
 var transactionTitle = document.querySelector(".title");
@@ -20,23 +30,29 @@ var fetchUserTransaction = async (transactionId) => {
   }
 };
 
+var settingUpInitiallFormData = ({
+  title,
+  cost,
+  transactionType: transType,
+  transactionAt: transAt,
+}) => {
+
+
+  // setting initiall values to form
+  transactionTitle.value = title;
+  transactionCost.value = cost;
+  transactionType.value = transType;
+  transactionAt.value = transAt.toDate().toISOString().split("T")[0];
+};
+
 // auth listner
 auth.onAuthStateChanged(async (user) => {
   try {
     if (user) {
       // form initial value handling
-      var {
-        title,
-        cost,
-        transactionType: transType,
-        transactionAt: transAt,
-      } = await fetchUserTransaction(transactionId);
+      var transaction = await fetchUserTransaction(transactionId);
 
-      // setting initiall values to form
-      transactionTitle.value = title;
-      transactionCost.value = cost;
-      transactionType.value = transType;
-      transactionAt.value = transAt.toDate().toISOString().split("T")[0];
+      settingUpInitiallFormData(transaction);
     } else {
       location.assign("./index.html");
       // console.log("user logged out");
@@ -46,7 +62,16 @@ auth.onAuthStateChanged(async (user) => {
   }
 });
 
-// update tranasction function which take transaction id of transaction which is required to update
+
+
+/* 
+update tranasction function
+  edit transaction
+  make transaction obj  
+  update taht transaction in firestore with new data
+  redirect to dashboard !
+*/
+
 var updateTransaction = async (transactionId) => {
   try {
     var updatedTitle = transactionTitle.value;
@@ -86,6 +111,14 @@ var deleteTransaction = async (transactionId) => {
   }
 };
 
+// back-to button
+var backToBtn = () => {
+  //send user back to dashboard page
+  location.assign("./dashboard.html");
+};
+
+
+// listener
 transactionEditForm.addEventListener("click", (e) => {
   e.preventDefault();
   if (e.target.id.includes("updateBtn")) {
@@ -95,6 +128,9 @@ transactionEditForm.addEventListener("click", (e) => {
   if (e.target.id.includes("deleteBtn")) {
     deleteTransaction(transactionId);
     // console.log("delete btn click");
+  }
+  if (e.target.id.includes("backToBtn")) {
+    backToBtn();
   } else {
     return;
   }

@@ -5,26 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./css/dashboard.css">
+    <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+    integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+    crossorigin
+    />
 </head>
 <body>
 
     <div class="container">
         <div class="navbar ">
             <div class="logo flex"><h3>logo</h3></div>
-            <div class="amount flex"><h2>0RS</h2></div>
-            <div class="name flex"> <h3>Name</h3> <button class="signoutBtn">signout</button> </div>
+            <div class="amount flex"><h2>0 RS</h2></div>
+            <div class="name flex"> <h3>Name</h3> <button class="signoutBtn styleBtn">signout</button> </div>
         </div>
         <div class="transactionFormArea flex">
             <form class="transactionForm">
-                <input type="text" placeholder="Title" class="title">
-                <input type="text" placeholder="Cost" class="cost">
-                <select class="transactionType">
+                <input type="text" placeholder="Title" class="title input">
+                <input type="text" placeholder="Cost" class="cost input">
+                <select class="transactionType input">
                     <option >Select transaction type</option>
                     <option selected="selected" value="expense">Expense</option>
                     <option value="income">Income</option>
-                </select>
-                <input type="date" class="transactionAt">
-                <button type="submit">Add</button>
+                </select> 
+                <input type="date" class="transactionAt input">
+                <button type="submit" class="styleBtn addBtn input">Add</button>
             </form>
         </div>
         <div class="transactionList">
